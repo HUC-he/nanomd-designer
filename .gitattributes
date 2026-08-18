@@ -1,0 +1,13 @@
+# Normalize line endings; keep shell scripts LF so they work in WSL.
+* text=auto
+
+*.sh text eol=lf
+*.py text eol=lf
+*.qss text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+*.cff text eol=lf
+LICENSE text eol=lf
