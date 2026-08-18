@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as below."
+title: "NanoMD Designer"
+version: 0.1.0
+date-released: 2026-08-18
+license: MIT
+keywords:
+  - LAMMPS
+  - molecular dynamics
+  - nanochannel
+  - nanofluidics
+  - GUI
+authors:
+  - name: "shiyuhe1"
+    email: "shiyuhe1@163.com"

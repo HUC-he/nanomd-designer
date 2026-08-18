@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>NanoMD Designer — UI 配色预览</title>
+<style>
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    margin: 28px;
+    background: #f4f7fa;
+    color: #1e2a38;
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .sub { color: #5b6b7e; margin-bottom: 20px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; }
+  .card { flex: 1 1 460px; border-radius: 10px; padding: 16px; }
+  .card.dark { background: #0e1621; color: #e8eef5; }
+  .card.light { background: #ffffff; color: #1e2a38; border: 1px solid #d5dee8; }
+  .card h2 { font-size: 15px; margin: 0 0 12px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
+  .swatch { border-radius: 8px; padding: 10px 10px 8px; }
+  .swatch .name { font-size: 12px; font-weight: 600; }
+  .swatch .hex { font-size: 11px; opacity: .75; }
+  .swatch.bordered { border: 1px solid rgba(127,127,127,.35); }
+  .hint { margin-top: 14px; font-size: 12px; opacity: .7; }
+</style>
+</head>
+<body>
+
+<h1>NanoMD Designer — 界面配色预览</h1>
+<div class="sub">v0.1 · 深色 Deep Channel / 浅色 Clear Water · QSS 见 assets/themes/</div>
+
+<div class="row">
+  <div class="card dark">
+    <h2>深色 Deep Channel</h2>
+    <div class="swatches">
+      <div class="swatch" style="background:#0e1621"><div class="name">bg</div><div class="hex">#0E1621</div></div>
+      <div class="swatch" style="background:#162130"><div class="name">surface</div><div class="hex">#162130</div></div>
+      <div class="swatch" style="background:#1d2b3d"><div class="name">surface-2</div><div class="hex">#1D2B3D</div></div>
+      <div class="swatch bordered" style="background:#28394e"><div class="name">border</div><div class="hex">#28394E</div></div>
+      <div class="swatch" style="background:#e8eef5"><div class="name">text</div><div class="hex">#E8EEF5</div></div>
+      <div class="swatch" style="background:#93a5b8"><div class="name">text-muted</div><div class="hex">#93A5B8</div></div>
+      <div class="swatch" style="background:#5f7388"><div class="name">disabled</div><div class="hex">#5F7388</div></div>
+      <div class="swatch" style="background:#2dd4bf"><div class="name">accent</div><div class="hex">#2DD4BF</div></div>
+      <div class="swatch" style="background:#0d9488"><div class="name">accent-strong</div><div class="hex">#0D9488</div></div>
+      <div class="swatch" style="background:#60a5fa"><div class="name">accent-blue</div><div class="hex">#60A5FA</div></div>
+      <div class="swatch" style="background:#1e3a5f"><div class="name">selection</div><div class="hex">#1E3A5F</div></div>
+      <div class="swatch" style="background:#34d399"><div class="name">success</div><div class="hex">#34D399</div></div>
+      <div class="swatch" style="background:#fbbf24"><div class="name">warning</div><div class="hex">#FBBF24</div></div>
+      <div class="swatch" style="background:#f87171"><div class="name">error</div><div class="hex">#F87171</div></div>
+    </div>
+  </div>
+
+  <div class="card light">
+    <h2>浅色 Clear Water</h2>
+    <div class="swatches">
+      <div class="swatch" style="background:#f4f7fa"><div class="name">bg</div><div class="hex">#F4F7FA</div></div>
+      <div class="swatch bordered" style="background:#ffffff"><div class="name">surface</div><div class="hex">#FFFFFF</div></div>
+      <div class="swatch" style="background:#eaf0f6"><div class="name">surface-2</div><div class="hex">#EAF0F6</div></div>
+      <div class="swatch bordered" style="background:#d5dee8"><div class="name">border</div><div class="hex">#D5DEE8</div></div>
+      <div class="swatch" style="background:#1e2a38"><div class="name">text</div><div class="hex">#1E2A38</div></div>
+      <div class="swatch" style="background:#5b6b7e"><div class="name">text-muted</div><div class="hex">#5B6B7E</div></div>
+      <div class="swatch" style="background:#8b9aa9"><div class="name">disabled</div><div class="hex">#8B9AA9</div></div>
+      <div class="swatch" style="background:#0d9488"><div class="name">accent</div><div class="hex">#0D9488</div></div>
+      <div class="swatch" style="background:#0f766e"><div class="name">accent-strong</div><div class="hex">#0F766E</div></div>
+      <div class="swatch" style="background:#2563eb"><div class="name">accent-blue</div><div class="hex">#2563EB</div></div>
+      <div class="swatch" style="background:#dbeafe"><div class="name">selection</div><div class="hex">#DBEAFE</div></div>
+      <div class="swatch" style="background:#059669"><div class="name">success</div><div class="hex">#059669</div></div>
+      <div class="swatch" style="background:#d97706"><div class="name">warning</div><div class="hex">#D97706</div></div>
+      <div class="swatch" style="background:#dc2626"><div class="name">error</div><div class="hex">#DC2626</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top:24px">
+  <div class="card light">
+    <h2>原子 / 分子配色（两主题通用）</h2>
+    <div class="swatches">
+      <div class="swatch" style="background:#8a97a6"><div class="name">C 石墨烯</div><div class="hex">#8A97A6</div></div>
+      <div class="swatch" style="background:#e5484d"><div class="name">O 氧</div><div class="hex">#E5484D</div></div>
+      <div class="swatch bordered" style="background:#f2f4f8"><div class="name">H 氢</div><div class="hex">#F2F4F8</div></div>
+      <div class="swatch" style="background:#9d7bff"><div class="name">Na⁺</div><div class="hex">#9D7BFF</div></div>
+      <div class="swatch" style="background:#35c4c0"><div class="name">Cl⁻</div><div class="hex">#35C4C0</div></div>
+      <div class="swatch" style="background:#e58c4a"><div class="name">K⁺</div><div class="hex">#E58C4A</div></div>
+      <div class="swatch" style="background:#2e8fb8"><div class="name">Ca²⁺</div><div class="hex">#2E8FB8</div></div>
+    </div>
+    <div class="hint">官能团标记：-OH #34D399 · -COOH #FBBF24 · -NH₂ #60A5FA</div>
+  </div>
+</div>
+
+</body>
+</html>

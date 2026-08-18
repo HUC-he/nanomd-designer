@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nanomd-designer"
+version = "0.1.0"
+description = "Windows-native GUI for designing nanochannel MD systems and running them in WSL with LAMMPS"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "shiyuhe1", email = "shiyuhe1@163.com" },
+]
+keywords = ["lammps", "molecular-dynamics", "nanochannel", "wsl", "gui", "md"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "ase>=3.22",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+gui = [
+  "PySide6>=6.6",
+  "pyvista>=0.43",
+  "pyvistaqt>=0.11",
+  "pyqtgraph>=0.13",
+  "matplotlib>=3.7",
+]
+analysis = [
+  "MDAnalysis>=2.5",
+]
+dev = [
+  "pytest>=7.4",
+  "pytest-qt>=4.4",
+  "ruff>=0.4",
+]
+
+[project.scripts]
+nanomd = "nanomd.cli:main"
+nanomd-gui = "nanomd.gui.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nanomd = ["locales/*.ts", "locales/*.qm"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

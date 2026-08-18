@@ -1,0 +1,197 @@
+/* NanoMD Designer — Dark theme "Deep Channel"
+   Tokens: see docs/design/theme.md */
+
+QWidget {
+    color: #E8EEF5;
+    font-size: 10pt;
+}
+
+QMainWindow, QDialog {
+    background-color: #0E1621;
+}
+
+QWidget#Panel,
+QDockWidget,
+QTabWidget::pane,
+QGroupBox {
+    background-color: #162130;
+    border: 1px solid #28394E;
+    border-radius: 6px;
+}
+
+QTabBar::tab {
+    background: #162130;
+    color: #93A5B8;
+    border: 1px solid #28394E;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 7px 16px;
+    margin-right: 2px;
+}
+QTabBar::tab:selected {
+    background: #1D2B3D;
+    color: #E8EEF5;
+    border-top: 2px solid #2DD4BF;
+}
+QTabBar::tab:hover:!selected {
+    color: #E8EEF5;
+}
+
+QPushButton {
+    background-color: #1D2B3D;
+    border: 1px solid #28394E;
+    border-radius: 6px;
+    padding: 6px 14px;
+}
+QPushButton:hover {
+    background-color: #24354A;
+    border-color: #2DD4BF;
+}
+QPushButton:pressed {
+    background-color: #162130;
+}
+QPushButton:disabled {
+    color: #5F7388;
+    background-color: #162130;
+}
+QPushButton[primary="true"] {
+    background-color: #0D9488;
+    border-color: #0D9488;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+QPushButton[primary="true"]:hover {
+    background-color: #0F766E;
+}
+QPushButton[primary="true"]:disabled {
+    background-color: #2B5A55;
+    color: #9FB0C0;
+}
+
+QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox, QPlainTextEdit, QTextEdit {
+    background-color: #0E1621;
+    border: 1px solid #28394E;
+    border-radius: 6px;
+    padding: 4px 8px;
+    selection-background-color: #1E3A5F;
+}
+QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus,
+QPlainTextEdit:focus {
+    border-color: #2DD4BF;
+}
+QComboBox::drop-down {
+    border: none;
+    width: 22px;
+}
+QComboBox QAbstractItemView {
+    background-color: #162130;
+    border: 1px solid #28394E;
+    selection-background-color: #1E3A5F;
+}
+
+QCheckBox::indicator {
+    width: 15px;
+    height: 15px;
+}
+QCheckBox::indicator:unchecked {
+    border: 1px solid #28394E;
+    background: #0E1621;
+    border-radius: 3px;
+}
+QCheckBox::indicator:checked {
+    background: #0D9488;
+    border: 1px solid #0D9488;
+    border-radius: 3px;
+}
+
+QSlider::groove:horizontal {
+    height: 4px;
+    background: #28394E;
+    border-radius: 2px;
+}
+QSlider::handle:horizontal {
+    width: 14px;
+    height: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+    background: #2DD4BF;
+}
+
+QTableWidget, QTableView, QTreeWidget, QListWidget {
+    background-color: #0E1621;
+    alternate-background-color: #162130;
+    border: 1px solid #28394E;
+    border-radius: 6px;
+    gridline-color: #28394E;
+}
+QHeaderView::section {
+    background-color: #1D2B3D;
+    color: #93A5B8;
+    border: none;
+    border-bottom: 1px solid #28394E;
+    padding: 6px;
+}
+QTableWidget::item:selected, QTreeWidget::item:selected, QListWidget::item:selected {
+    background-color: #1E3A5F;
+    color: #E8EEF5;
+}
+
+QMenuBar {
+    background-color: #0E1621;
+}
+QMenuBar::item {
+    padding: 6px 10px;
+}
+QMenuBar::item:selected {
+    background-color: #1D2B3D;
+    border-radius: 4px;
+}
+QMenu {
+    background-color: #162130;
+    border: 1px solid #28394E;
+    border-radius: 6px;
+    padding: 4px;
+}
+QMenu::item {
+    padding: 6px 24px 6px 12px;
+    border-radius: 4px;
+}
+QMenu::item:selected {
+    background-color: #1E3A5F;
+}
+
+QStatusBar {
+    background-color: #0E1621;
+    color: #93A5B8;
+    border-top: 1px solid #28394E;
+}
+
+QToolTip {
+    background-color: #1D2B3D;
+    color: #E8EEF5;
+    border: 1px solid #28394E;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+QSplitter::handle {
+    background-color: #28394E;
+}
+
+QScrollBar:vertical {
+    background: #0E1621;
+    width: 10px;
+}
+QScrollBar::handle:vertical {
+    background: #28394E;
+    border-radius: 5px;
+    min-height: 24px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #3A4F66;
+}
+QScrollBar::add-line, QScrollBar::sub-line {
+    width: 0;
+    height: 0;
+}
