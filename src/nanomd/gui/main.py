@@ -20,6 +20,8 @@ def main() -> int:
         return 1
 
     app = QApplication([])
+    app.setApplicationName("NanoMD Designer")
+    app.setApplicationVersion(__version__)
     QMessageBox.information(
         None,
         "NanoMD Designer",
