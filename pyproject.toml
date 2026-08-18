@@ -48,6 +48,11 @@ dev = [
   "ruff>=0.4",
 ]
 
+[project.urls]
+Homepage = "https://github.com/HUC-he/nanomd-designer"
+Repository = "https://github.com/HUC-he/nanomd-designer"
+Documentation = "https://github.com/HUC-he/nanomd-designer/tree/main/docs"
+
 [project.scripts]
 nanomd = "nanomd.cli:main"
 nanomd-gui = "nanomd.gui.main:main"

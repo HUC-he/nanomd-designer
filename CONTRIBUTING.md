@@ -14,7 +14,7 @@ The project targets **Windows + WSL** as the primary platform.
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/shiyuhe1/nanomd-designer.git
+git clone https://github.com/HUC-he/nanomd-designer.git
 cd nanomd-designer
 python -m pip install -e ".[gui,analysis,dev]"
 ```

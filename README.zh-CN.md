@@ -1,5 +1,9 @@
 # NanoMD Designer
 
+[![CI](https://github.com/HUC-he/nanomd-designer/actions/workflows/ci.yml/badge.svg)](https://github.com/HUC-he/nanomd-designer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
+
 **在 Windows 里设计纳米通道 MD 体系、一键丢进 WSL 跑、再把结果拿回 Windows——全程不用碰终端。**
 
 NanoMD Designer 是一个开源的、中英双界面桌面 GUI，面向使用 [LAMMPS](https://www.lammps.org) 做纳米流体 / 电化学界面分子动力学模拟的材料与化学方向研究者，尤其是"不会编程、不懂 Linux"的 Windows 用户。

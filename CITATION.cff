@@ -3,6 +3,7 @@ message: "If you use this software in your research, please cite it as below."
 title: "NanoMD Designer"
 version: 0.1.0
 date-released: 2026-08-18
+repository-code: https://github.com/HUC-he/nanomd-designer
 license: MIT
 keywords:
   - LAMMPS
