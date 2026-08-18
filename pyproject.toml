@@ -17,7 +17,6 @@ keywords = ["lammps", "molecular-dynamics", "nanochannel", "wsl", "gui", "md"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Science/Research",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX :: Linux",
   "Programming Language :: Python :: 3",
