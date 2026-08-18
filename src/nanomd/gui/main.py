@@ -1,34 +1,24 @@
-"""Minimal GUI entry point (M0 placeholder).
-
-The full user interface arrives in M1. This entry point only verifies that
-the Qt stack is importable and shows a short message.
-"""
+"""NanoMD Designer GUI entry point."""
 
 from __future__ import annotations
 
+import sys
+
 
 def main() -> int:
+    from PySide6.QtWidgets import QApplication
+
     from nanomd import __version__
+    from nanomd.gui.main_window import MainWindow
+    from nanomd.gui.theme import apply_theme
 
-    try:
-        from PySide6.QtWidgets import QApplication, QMessageBox
-    except ImportError:
-        print(
-            "NanoMD Designer GUI requires PySide6. Install it with:\n"
-            '  pip install -e ".[gui]"'
-        )
-        return 1
-
-    app = QApplication([])
+    app = QApplication(sys.argv)
     app.setApplicationName("NanoMD Designer")
     app.setApplicationVersion(__version__)
-    QMessageBox.information(
-        None,
-        "NanoMD Designer",
-        f"NanoMD Designer {__version__}\n\n"
-        "The GUI arrives in M1 (Windows + WSL bridge).\nStay tuned!",
-    )
-    return 0
+    apply_theme(app, "dark")
+    window = MainWindow()
+    window.show()
+    return app.exec()
 
 
 if __name__ == "__main__":

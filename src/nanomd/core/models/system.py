@@ -92,6 +92,7 @@ class System:
     ions: IonSpec | None = field(default_factory=IonSpec)
     temperature_k: float = 300.0
     target_velocity_ang_per_ps: float = 0.5
+    drive_force_kcal_mol_ang: float = 0.0005
     seed: int = 12345
 
     def __post_init__(self) -> None:
@@ -99,6 +100,8 @@ class System:
             raise ValueError("temperature must be positive")
         if self.target_velocity_ang_per_ps <= 0:
             raise ValueError("target velocity must be positive")
+        if self.drive_force_kcal_mol_ang <= 0:
+            raise ValueError("drive force must be positive")
 
     def summary(self) -> str:
         """Human-readable one-line description."""

@@ -16,6 +16,17 @@ SOURCE_OPLSAA = "Jorgensen et al., J. Am. Chem. Soc. 118, 11225 (1996)"
 SOURCE_AQVIST = "Aqvist, J. Phys. Chem. 94, 8021 (1990)"
 SOURCE_OPLSAA_2024 = "OPLS-AA 2024 (moltemplate, J. Phys. Chem. B 2023 supplement)"
 
+ELEMENT_MASS: dict[str, float] = {
+    "C": 12.011,
+    "H": 1.008,
+    "O": 15.999,
+    "N": 14.007,
+    "Na": 22.990,
+    "Cl": 35.450,
+    "K": 39.098,
+    "Ca": 40.078,
+}
+
 
 @dataclass(frozen=True)
 class AtomType:
@@ -144,12 +155,21 @@ FUNCTIONAL_GROUPS: dict[str, FunctionalGroup] = {
 }
 
 
-def all_atom_types() -> dict[str, AtomType]:
-    """Flatten every atom type in the library into one name -> AtomType map."""
+def all_atom_types(prefer_water: str | None = None) -> dict[str, AtomType]:
+    """Flatten every atom type into one name -> AtomType map.
+
+    Water oxygens/hydrogens share type names across models (``O_w``/``H_w``),
+    so ``prefer_water`` selects which model's values win.
+    """
     out: dict[str, AtomType] = dict(GRAPHENE_ATOMS)
-    for model in WATER_MODELS.values():
+    if prefer_water is not None:
+        model = WATER_MODELS[prefer_water]
         out[model.oxygen.name] = model.oxygen
         out[model.hydrogen.name] = model.hydrogen
+    else:
+        for model in WATER_MODELS.values():
+            out.setdefault(model.oxygen.name, model.oxygen)
+            out.setdefault(model.hydrogen.name, model.hydrogen)
     for ion_set in ION_SETS.values():
         for atom in ion_set.values():
             out[atom.name] = atom
