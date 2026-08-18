@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import (
+    QCheckBox,
     QComboBox,
     QDoubleSpinBox,
     QFormLayout,
     QGroupBox,
+    QHBoxLayout,
     QLabel,
     QPushButton,
     QSpinBox,
@@ -59,7 +61,18 @@ class DesignPanel(QWidget):
         self.seed.setRange(1, 2**31 - 1)
         self.seed.setValue(12345)
         self.oxidation = self._double_spin(0.0, 0.5, 0.0, 0.05)
-        self.oxidation.setEnabled(False)
+        self.oxidation.setSingleStep(0.05)
+        self.group_oh = QCheckBox("-OH")
+        self.group_oh.setChecked(True)
+        self.group_cooh = QCheckBox("-COOH")
+        self.group_nh2 = QCheckBox("-NH2")
+        groups_row = QHBoxLayout()
+        groups_row.addWidget(self.group_oh)
+        groups_row.addWidget(self.group_cooh)
+        groups_row.addWidget(self.group_nh2)
+        groups_row.addStretch(1)
+        self.groups_widget = QWidget()
+        self.groups_widget.setLayout(groups_row)
 
         self._advanced = QGroupBox()
         adv_form = QFormLayout(self._advanced)
@@ -77,6 +90,7 @@ class DesignPanel(QWidget):
         form.addRow(tr("design.conc"), self.conc)
         form.addRow(tr("design.temp"), self.temp)
         form.addRow(tr("design.seed"), self.seed)
+        form.addRow(tr("design.groups"), self.groups_widget)
         form.addRow(tr("design.oxidation"), self.oxidation)
 
         adv_form.addRow(tr("design.velocity"), self.target_vel)
@@ -119,12 +133,28 @@ class DesignPanel(QWidget):
     def to_system(self) -> System:
         box = Box(self.lx.value(), self.ly.value(), self.lz.value())
         channel = SlitChannel(box, self.wall_low.value(), self.wall_high.value())
+        groups = tuple(
+            key
+            for key, checkbox in (
+                ("oh", self.group_oh),
+                ("cooh", self.group_cooh),
+                ("nh2", self.group_nh2),
+            )
+            if checkbox.isChecked()
+        )
+        if not groups:
+            raise ValueError("select at least one functional group")
+        oxidation = self.oxidation.value()
         return System(
             name="untitled",
             channel=channel,
             water=WaterSpec(model_key=self.water.currentData()),
             ions=IonSpec(salt=self.salt.currentText(), concentration_molar=self.conc.value()),
-            membrane=MembraneSpec(material="graphene", oxidation_fraction=0.0),
+            membrane=MembraneSpec(
+                material="go" if oxidation > 0 else "graphene",
+                oxidation_fraction=oxidation,
+                functional_groups=groups,
+            ),
             temperature_k=self.temp.value(),
             seed=self.seed.value(),
             target_velocity_ang_per_ps=self.target_vel.value(),
@@ -148,7 +178,8 @@ class DesignPanel(QWidget):
             (8, "design.conc"),
             (9, "design.temp"),
             (10, "design.seed"),
-            (11, "design.oxidation"),
+            (11, "design.groups"),
+            (12, "design.oxidation"),
         ]
         for row, key in labels:
             item = form.itemAt(row, QFormLayout.LabelRole)

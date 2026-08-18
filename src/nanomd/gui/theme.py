@@ -14,6 +14,7 @@ _CANDIDATES = (
 ATOM_COLORS: dict[str, str] = {
     "C": "#8A97A6",
     "C_OH": "#8A97A6",
+    "C_NH2": "#8A97A6",
     "O_w": "#E5484D",
     "H_w": "#F2F4F8",
     "O_g": "#E5484D",

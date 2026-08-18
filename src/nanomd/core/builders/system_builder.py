@@ -30,6 +30,7 @@ def build_system(system: System) -> Structure:
     walls = build_graphene_walls(
         system.channel,
         oxidation_fraction=system.membrane.oxidation_fraction,
+        functional_groups=system.membrane.functional_groups,
         seed=system.seed,
     )
     merged = Structure(box=system.channel.box)

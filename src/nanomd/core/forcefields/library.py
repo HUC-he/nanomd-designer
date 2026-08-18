@@ -95,6 +95,7 @@ WATER_MODELS: dict[str, WaterModel] = {
 GRAPHENE_ATOMS: dict[str, AtomType] = {
     "C": AtomType("C", "C", 0.0, 3.550, 0.070, SOURCE_SPEC),
     "C_OH": AtomType("C_OH", "C", 0.150, 3.550, 0.070, SOURCE_SPEC),
+    "C_NH2": AtomType("C_NH2", "C", 0.180, 3.550, 0.070, SOURCE_SPEC),
 }
 
 
@@ -153,6 +154,13 @@ FUNCTIONAL_GROUPS: dict[str, FunctionalGroup] = {
         source=SOURCE_OPLSAA_2024,
     ),
 }
+
+# Atom types that belong to the rigid membrane (graphene carbons plus every
+# grafted functional-group atom). Used to build the LAMMPS "wall" group.
+WALL_ATOM_NAMES: frozenset[str] = frozenset(
+    set(GRAPHENE_ATOMS)
+    | {atom.name for group in FUNCTIONAL_GROUPS.values() for atom in group.atoms}
+)
 
 
 def all_atom_types(prefer_water: str | None = None) -> dict[str, AtomType]:

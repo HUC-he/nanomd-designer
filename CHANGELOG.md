@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - M1 (in progress): core system data models, force-field library v1 with
   citations, structure builders (graphene walls, TIP3P/SPC-E water fill,
   NaCl/KCl/CaCl2 ion placement, full-system assembly).
+- M1/M2: Windows-native GUI (PySide6) with 3D preview, zh/en i18n, dark/light
+  themes, data/in writers, and GO functionalization (-OH / -COOH / -NH2)
+  with tunable oxidation degree.
 
 ### Planned
 

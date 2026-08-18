@@ -36,9 +36,47 @@ def test_graphene_walls_geometry() -> None:
     assert walls.total_charge() == pytest.approx(0.0)
 
 
-def test_graphene_walls_reject_oxidation_in_m1() -> None:
-    with pytest.raises(NotImplementedError):
-        build_graphene_walls(make_channel(), oxidation_fraction=0.1)
+def test_graphene_go_oxidation_fraction() -> None:
+    walls = build_graphene_walls(make_channel(), oxidation_fraction=0.1, seed=7)
+    n_c = sum(1 for a in walls.atoms if a.type_name == "C")
+    n_c_oh = sum(1 for a in walls.atoms if a.type_name == "C_OH")
+    n_o_g = sum(1 for a in walls.atoms if a.type_name == "O_g")
+    n_h_g = sum(1 for a in walls.atoms if a.type_name == "H_g")
+    assert 0.08 < n_c_oh / (n_c + n_c_oh) < 0.12
+    assert n_o_g == n_c_oh
+    assert n_h_g == n_c_oh
+    assert walls.total_charge() == pytest.approx(0.0)
+
+
+def test_graphene_go_all_groups_neutral() -> None:
+    walls = build_graphene_walls(
+        make_channel(),
+        oxidation_fraction=0.3,
+        functional_groups=("oh", "cooh", "nh2"),
+        seed=11,
+    )
+    names = {a.type_name for a in walls.atoms}
+    assert {"C_OH", "C_carboxyl", "C_NH2"} <= names
+    assert walls.total_charge() == pytest.approx(0.0, abs=1e-9)
+
+
+def test_graphene_go_atoms_inside_box() -> None:
+    channel = make_channel()
+    walls = build_graphene_walls(
+        channel, oxidation_fraction=0.2, functional_groups=("oh", "cooh", "nh2"), seed=3
+    )
+    box = channel.box
+    for atom in walls.atoms:
+        assert 0.0 <= atom.xyz[0] < box.lx
+        assert 0.0 <= atom.xyz[1] < box.ly
+        assert 0.0 <= atom.xyz[2] < box.lz
+
+
+def test_graphene_go_deterministic() -> None:
+    channel = make_channel()
+    a = build_graphene_walls(channel, oxidation_fraction=0.2, seed=42)
+    b = build_graphene_walls(channel, oxidation_fraction=0.2, seed=42)
+    assert a.positions_array() == pytest.approx(b.positions_array())
 
 
 def test_water_fill_count_and_topology() -> None:

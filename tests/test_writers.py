@@ -1,7 +1,7 @@
 """Tests for the LAMMPS data / in-file writers."""
 
 from nanomd.core.builders.system_builder import build_system
-from nanomd.core.models.system import Box, IonSpec, SlitChannel, System
+from nanomd.core.models.system import Box, IonSpec, MembraneSpec, SlitChannel, System
 from nanomd.core.writers.data_writer import write_data_file
 from nanomd.core.writers.input_writer import write_input_file
 
@@ -88,6 +88,23 @@ def test_wall_group_excludes_ions(tmp_path) -> None:
     wall_line = next(
         line for line in out.read_text(encoding="utf-8").splitlines() if "wall type" in line
     )
-    wall_ids = wall_line.split()[-1].split()
+    wall_ids = wall_line.split("type", 1)[1].split()
     assert cl_type_id not in wall_ids
     assert "1" in wall_ids  # graphene carbon is the wall
+
+
+def test_wall_group_includes_go_atoms(tmp_path) -> None:
+    system = make_system()
+    system.membrane = MembraneSpec(
+        material="go", oxidation_fraction=0.2, functional_groups=("oh", "cooh", "nh2")
+    )
+    structure = build_system(system)
+    out = write_input_file(system, structure, "system.data", tmp_path / "in.lammps")
+    types = structure.type_names()
+    wall_line = next(
+        line for line in out.read_text(encoding="utf-8").splitlines() if "wall type" in line
+    )
+    wall_ids = wall_line.split("type", 1)[1].split()
+    for name in ("O_g", "C_carboxyl", "N_amine"):
+        assert str(types.index(name) + 1) in wall_ids, f"{name} should be in the wall group"
+    assert str(types.index("Cl-") + 1) not in wall_ids
