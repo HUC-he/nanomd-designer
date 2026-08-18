@@ -77,3 +77,17 @@ def test_input_file_spce_parameters(tmp_path) -> None:
     out = write_input_file(system, structure, "system.data", tmp_path / "in.lammps")
     text = out.read_text(encoding="utf-8")
     assert "0.1550 3.1660" in text  # SPC/E oxygen, must not be TIP3P values
+
+
+def test_wall_group_excludes_ions(tmp_path) -> None:
+    system = make_system()
+    structure = build_system(system)
+    out = write_input_file(system, structure, "system.data", tmp_path / "in.lammps")
+    types = structure.type_names()
+    cl_type_id = str(types.index("Cl-") + 1)
+    wall_line = next(
+        line for line in out.read_text(encoding="utf-8").splitlines() if "wall type" in line
+    )
+    wall_ids = wall_line.split()[-1].split()
+    assert cl_type_id not in wall_ids
+    assert "1" in wall_ids  # graphene carbon is the wall

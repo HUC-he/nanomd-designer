@@ -31,6 +31,11 @@ def test_render_offscreen(tmp_path) -> None:
 
 
 def test_main_window_constructs() -> None:
+    if os.environ.get("NANOMD_GUI_TEST") != "1":
+        pytest.skip(
+            "interactive-window test needs a working OpenGL/X display; "
+            "set NANOMD_GUI_TEST=1 on a desktop session to enable"
+        )
     from PySide6.QtWidgets import QApplication
 
     app = QApplication.instance() or QApplication([])
